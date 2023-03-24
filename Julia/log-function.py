@@ -30,5 +30,5 @@ def logreg(csvData, dependentVar):
     print("Accuracy score: ", accuracy_score(y_pred, y_test))
     print("Confusion matrix: ", confusion_matrix(y_pred, y_test))
 
-logreg()
+logreg("tensorflow_continuous.csv", "activity")
 
