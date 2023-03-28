@@ -13,7 +13,7 @@ def linreg(csvData, dependentVar):
     label = df[dependentVar]
     train = df.drop([dependentVar], axis=1)
 
-    x_train, x_test, y_train, y_test = train_test_split(train, label, test_size = 0.1, random_state = 2)
+    x_train, x_test, y_train, y_test = train_test_split(train, label, test_size = 0.2, random_state = 2)
 
     reg = LinearRegression()
     print(reg.fit(x_train, y_train)) # Fit the linear model
@@ -21,5 +21,6 @@ def linreg(csvData, dependentVar):
     print("R squared value: ", r2_score(y_test, preds))
     print("Coefficient of determination of the prediction: ", reg.score(x_test, y_test)) # Return the coefficient of determination of the prediction
 
+linreg("tensorflow_continuous.csv", "activity")
 linreg("tensorflow_continuous.csv", "activity")
 
