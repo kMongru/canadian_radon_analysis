@@ -1,8 +1,14 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
 import numpy as np
+import matplotlib.pyplot as plt
+import sys
 import pandas as pd
 from sklearn.metrics import r2_score
+
+def column(matrix, i):
+    return [row[i] for row in matrix]
 
 # Function to find linear regression
 
@@ -20,7 +26,21 @@ def linreg(csvData, dependentVar):
     preds = reg.predict(x_test)
     print("R squared value: ", r2_score(y_test, preds))
     print("Coefficient of determination of the prediction: ", reg.score(x_test, y_test)) # Return the coefficient of determination of the prediction
+    print("Coefficients: ", reg.coef_)
+    print("Mean squared error: ", mean_squared_error(y_test, preds))
+
+    # Find dependent variable column index
+    colIndex = df.columns.get_loc(dependentVar)
+    res = np.array(x_test)[:,colIndex - 4] # prepping test matrix for plotting
+
+    # Plotting
+    #plt.scatter(res, preds)
+    #plt.show()
+
+    np.savetxt("test.csv", res, delimiter=",")
+
+
 
 linreg("tensorflow_continuous.csv", "activity")
-linreg("tensorflow_continuous.csv", "activity")
+
 

@@ -17,3 +17,5 @@ for row in df.index:
 df = df.dropna()
 
 df.to_csv('radon-concentration.csv', index = False) 
+
+# Drop Radon/Thoron columns for linear regression
