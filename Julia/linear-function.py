@@ -1,6 +1,8 @@
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
@@ -17,25 +19,37 @@ def linreg(csvData, dependentVar):
     df = pd.read_csv(path, encoding='latin-1')
     
     label = df[dependentVar]
-    train = df.drop([dependentVar], axis=1)
+    x_train, x_test, y_train, y_test = train_test_split(df, label, test_size = 0.2, random_state = 2)
 
-    x_train, x_test, y_train, y_test = train_test_split(train, label, test_size = 0.2, random_state = 2)
+    print(x_test.columns)
+    radonTest = x_test[dependentVar]
 
-    reg = LinearRegression()
-    print(reg.fit(x_train, y_train)) # Fit the linear model
+    x_train = x_train.drop([dependentVar], axis=1)
+    x_test = x_test.drop([dependentVar], axis=1)
+
+    reg = RandomForestRegressor()
+    reg.fit(x_train, y_train) # Fit the linear model
     preds = reg.predict(x_test)
     print("R squared value: ", r2_score(y_test, preds))
     print("Coefficient of determination of the prediction: ", reg.score(x_test, y_test)) # Return the coefficient of determination of the prediction
-    print("Coefficients: ", reg.coef_)
+    #print("Coefficients: ", reg.coef_)
     print("Mean squared error: ", mean_squared_error(y_test, preds))
+    print("Mean absolute error: ", mean_absolute_error(y_test, preds))
 
-    # Find dependent variable column index
-    colIndex = df.columns.get_loc(dependentVar)
-    res = np.array(x_test)[:,colIndex] # prepping test matrix for plotting
-
+    
     # Plotting
-    plt.scatter(res, preds)
+    plt.scatter(radonTest, preds)
     plt.show()
+
+    # How many points are there that are very far apart
+    # outliers
+    # in test set, we had radon value of more than 7k
+    # investigate why we predicted 200 when the point is 7k - what is the difference between these?
+    # find max and min values in this dataset - the dataset might be skewed, so we have to remove those outliers
+    # 
+
+
+
 
 
 
