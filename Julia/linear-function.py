@@ -31,13 +31,12 @@ def linreg(csvData, dependentVar):
 
     # Find dependent variable column index
     colIndex = df.columns.get_loc(dependentVar)
-    res = np.array(x_test)[:,colIndex - 4] # prepping test matrix for plotting
+    res = np.array(x_test)[:,colIndex] # prepping test matrix for plotting
 
     # Plotting
-    #plt.scatter(res, preds)
-    #plt.show()
+    plt.scatter(res, preds)
+    plt.show()
 
-    np.savetxt("test.csv", res, delimiter=",")
 
 
 
