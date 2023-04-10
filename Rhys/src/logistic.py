@@ -56,10 +56,7 @@ best_combo = max(accuracy_scores, key=accuracy_scores.get)
 print("Best combination of independent variables:", best_combo)
 print("Highest accuracy score:", accuracy_scores[best_combo])
 
-scaler = StandardScaler()
-train_scaled = scaler.fit_transform(independent_vars) # Fit the scaler to the training data
-pickle.dump(scaler, open('scaler.pkl','wb')) # Save the scaler for later use (Example: To transform new data to predict)
-model = LogisticRegression()
-model.fit(train_scaled, dependent_var)
-filename = 'model.sav'
-pickle.dump(model, open(filename, 'wb')) # Save the model for later use
+
+## Outputting to pickle
+filename = 'finalized_model.sav'
+pickle.dump(model, open(filename, 'wb'))
