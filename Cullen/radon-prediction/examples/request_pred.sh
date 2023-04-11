@@ -1,0 +1,1 @@
+curl -d '{"instances": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}' -X POST http://localhost:8501/v1/models/radon_prediction:predict
