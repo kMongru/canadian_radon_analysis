@@ -1,16 +1,20 @@
 import "./App.css";
-import React from "react";
-
-function handleFile(files) {
-  alert("Number of files: " + files.length);
-}
+import React, { useState } from "react";
 
 // drag drop file component
-function DragDropFile() {
+function DragDropFile(props) {
+  const [loading, setLoading] = props.loading;
   // drag state
   const [dragActive, setDragActive] = React.useState(false);
   // ref
   const inputRef = React.useRef(null);
+
+  function handleFile(files) {
+    setLoading(true);
+
+    fetch();
+    alert("Number of files: " + files.length);
+  }
 
   // handle drag events
   const handleDrag = function (e) {
@@ -85,10 +89,16 @@ function DragDropFile() {
 }
 
 function App() {
+  const [loading, setLoading] = useState();
+
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Remove Radon!</h1>
-      <DragDropFile />
+      {loading ? (
+        <p>"loading"</p>
+      ) : (
+        <DragDropFile loading={[loading, setLoading]} />
+      )}
     </div>
   );
 }
