@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
 
@@ -88,6 +87,7 @@ function DragDropFile() {
 function App() {
   return (
     <div>
+      <h1 style={{ textAlign: "center" }}>Remove Radon!</h1>
       <DragDropFile />
     </div>
   );

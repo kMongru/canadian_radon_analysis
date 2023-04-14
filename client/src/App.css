@@ -17,6 +17,7 @@ body {
   max-width: 100%;
   text-align: center;
   position: relative;
+  margin: auto;
 }
 
 #input-file-upload {
