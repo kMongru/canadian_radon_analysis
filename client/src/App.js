@@ -1,19 +1,20 @@
-import "./App.css";
+import "./App.scss";
 import React, { useState } from "react";
 
 // drag drop file component
 function DragDropFile(props) {
-  const [loading, setLoading] = props.loading;
+  const [status, setStatus] = props.status;
+  const [results, setResults] = props.results;
   // drag state
   const [dragActive, setDragActive] = React.useState(false);
   // ref
   const inputRef = React.useRef(null);
 
-  function handleFile(files) {
-    setLoading(true);
-
-    fetch();
-    alert("Number of files: " + files.length);
+  async function handleFile(files) {
+    setStatus("loading");
+    const resp = await (await fetch(`/api/`)).json();
+    setStatus("results");
+    setResults(resp);
   }
 
   // handle drag events
@@ -88,17 +89,61 @@ function DragDropFile(props) {
   );
 }
 
-function App() {
-  const [loading, setLoading] = useState();
+function RenderSwitch() {
+  const [status, setStatus] = useState();
+  const [results, setResults] = useState();
 
+  switch (status) {
+    case "loading":
+      function complete() {
+        // Get the circle-loader element by its class name
+        var circleLoader = document.querySelector(".circle-loader");
+
+        // Get the checkmark element by its class name
+        var checkmark = document.querySelector(".checkmark");
+
+        // Toggle the 'load-complete' class on the circle-loader element
+        circleLoader.classList.toggle("load-complete");
+
+        // Toggle the visibility of the checkmark element
+        checkmark.style.display = "inline";
+      }
+
+      return (
+        <div>
+          <div className="circle-loader">
+            <div className="checkmark draw"></div>
+          </div>
+
+          <p>
+            <button
+              onClick={complete}
+              id="toggle"
+              type="button"
+              className="btn btn-success"
+            >
+              Toggle Completed
+            </button>
+          </p>
+        </div>
+      );
+    case "results":
+      return <p>results</p>;
+    default:
+      return (
+        <DragDropFile
+          status={[status, setStatus]}
+          results={[results, setResults]}
+        />
+      );
+  }
+}
+
+function App() {
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Remove Radon!</h1>
-      {loading ? (
-        <p>"loading"</p>
-      ) : (
-        <DragDropFile loading={[loading, setLoading]} />
-      )}
+      {RenderSwitch()}
     </div>
   );
 }
