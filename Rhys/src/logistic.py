@@ -56,7 +56,6 @@ best_combo = max(accuracy_scores, key=accuracy_scores.get)
 print("Best combination of independent variables:", best_combo)
 print("Highest accuracy score:", accuracy_scores[best_combo])
 
-
-## Outputting to pickle
-filename = 'finalized_model.sav'
-pickle.dump(model, open(filename, 'wb'))
+# ## Outputting to pickle
+# filename = 'finalized_model.sav'
+# pickle.dump(model, open(filename, 'wb'))
