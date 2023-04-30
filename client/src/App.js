@@ -185,11 +185,6 @@ function RenderSwitch() {
         </div>
       );
     case "results":
-      const data = [
-        { radon: 65.80246302857995, timestamp: "01-02" },
-        { radon: 65.80246302857995, timestamp: "01-02" },
-        { radon: 65.80246302857995, timestamp: "01-02" },
-      ];
       return (
         <>
           <h1>Results</h1>
@@ -202,23 +197,23 @@ function RenderSwitch() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) =>
-                item.randon > 100 ? (
+              {results.map((item) =>
+                item.body.radon < 300 ? (
                   <tr
-                    key={item.timestamp}
+                    key={item.body.timestamp}
                     style={{ backgroundColor: "lightgreen" }}
                   >
-                    <td>{item.radon}</td>
-                    <td>{item.timestamp}</td>
+                    <td>{item.body.radon.toFixed(4)}</td>
+                    <td>{item.body.timestamp}</td>
                     <td>{"✅"}</td>
                   </tr>
                 ) : (
                   <tr
-                    key={item.timestamp}
+                    key={item.body.timestamp}
                     style={{ backgroundColor: "lightcoral" }}
                   >
-                    <td>{item.radon}</td>
-                    <td>{item.timestamp}</td>
+                    <td>{item.body.radon.toFixed(4)}</td>
+                    <td>{item.body.timestamp}</td>
                     <td>{"⚠️"}</td>
                   </tr>
                 )
