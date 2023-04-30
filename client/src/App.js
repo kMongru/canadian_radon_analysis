@@ -14,20 +14,63 @@ function DragDropFile(props) {
 
   async function handleFile(files) {
     setStatus("loading");
-    const test = Papa.parse(files, {
+    Papa.parse(files, {
       header: true,
       skipEmptyLines: true,
       complete: function (results) {
         console.log(results.data);
+        const csv = results.data;
+        // create urls
+        const reqs = [];
+        console.log(csv);
+        for (const row of csv) {
+          const {
+            timestamp: ts,
+            pressure,
+            temperature: temp,
+            tvoc,
+            humidity: humid,
+          } = row;
+          reqs.push(
+            `https://1jjce35g6d.execute-api.us-east-2.amazonaws.com/dev/?pressure=${pressure}&temperature=${temp}&tvoc=${tvoc}&humidity=${humid}&timestamp=${ts}`
+          );
+        }
+
+        // make req
+        const fetchPromises = [];
+        for (const req of reqs) {
+          fetchPromises.push(fetch(req));
+        }
+
+        // Define an async function to handle the fetch requests
+        async function fetchAllData() {
+          try {
+            // Use Promise.all() to wait for all fetch promises to resolve
+            const responses = await Promise.all(fetchPromises);
+
+            // Iterate through the responses and extract the JSON data
+            const data = [];
+            for (const response of responses) {
+              const jsonData = await response.json();
+              data.push(jsonData);
+            }
+
+            // Do something with the data
+            console.log(data);
+            setResults(data);
+            setStatus("results");
+          } catch (error) {
+            // Handle any errors that occur during the fetch requests
+            console.error("Error fetching data:", error);
+          }
+        }
+        fetchAllData();
       },
     });
-    // const resp = await (await fetch(`/api/`)).json();
 
-    setTimeout(() => {
-      setStatus("results");
-    }, 5000);
-
-    setResults(test);
+    // setTimeout(() => {
+    //   setStatus("results");
+    // }, 2000);
   }
 
   // handle drag events
@@ -142,7 +185,48 @@ function RenderSwitch() {
         </div>
       );
     case "results":
-      return <p>results</p>;
+      const data = [
+        { radon: 65.80246302857995, timestamp: "01-02" },
+        { radon: 65.80246302857995, timestamp: "01-02" },
+        { radon: 65.80246302857995, timestamp: "01-02" },
+      ];
+      return (
+        <>
+          <h1>Results</h1>
+          <table style={{ margin: "20px auto" }}>
+            <thead>
+              <tr>
+                <th>Radon</th>
+                <th>Timestamp</th>
+                <th>Safety</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item) =>
+                item.randon > 100 ? (
+                  <tr
+                    key={item.timestamp}
+                    style={{ backgroundColor: "lightgreen" }}
+                  >
+                    <td>{item.radon}</td>
+                    <td>{item.timestamp}</td>
+                    <td>{"✅"}</td>
+                  </tr>
+                ) : (
+                  <tr
+                    key={item.timestamp}
+                    style={{ backgroundColor: "lightcoral" }}
+                  >
+                    <td>{item.radon}</td>
+                    <td>{item.timestamp}</td>
+                    <td>{"⚠️"}</td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+        </>
+      );
     default:
       return (
         <DragDropFile
@@ -171,8 +255,22 @@ function App() {
         <strong>Made with ❤️ by</strong>
         <div>
           {" "}
-          Julia Groza, Rhys Dominguez, Keegan Mongru, Cullen Macleod, Jack
-          Peplinski
+          <a href="https://www.linkedin.com/in/juliagroza/">
+            Julia Groza
+          </a>,{" "}
+          <a href="https://www.linkedin.com/in/rhys-dominguez/">
+            Rhys Dominguez
+          </a>
+          ,{" "}
+          <a href="https://www.linkedin.com/in/keegan-mongru/">Keegan Mongru</a>
+          ,{" "}
+          <a href="https://www.linkedin.com/in/cullen-macleod/">
+            Cullen Macleod
+          </a>
+          ,{" "}
+          <a href="https://www.linkedin.com/in/jack-peplinski/">
+            Jack Peplinski
+          </a>
         </div>
       </div>
     </div>
