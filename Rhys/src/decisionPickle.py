@@ -116,6 +116,11 @@ print("Mean Absolute Error - Unnormalized:", mae_unnormalized)
 print("Mean Squared Error:", mse_best)
 print("Mean Absolute Error:", mae_best)
 
+objects_to_pickle = {'best_model': best_model, 'df_summer': df_summer}
+
 ## Outputting to pickle
-filename = 'finalized_decision_model.sav'
-pickle.dump(best_model, open(filename, 'wb'))
+#filename = 'finalized_decision_model.sav'
+#pickle.dump(best_model, open(filename, 'wb'))
+
+with open('./Rhys/src/serialized_objects.pickle', 'wb') as f:
+    pickle.dump(objects_to_pickle, f)
