@@ -8,7 +8,8 @@ The experimentation folder include the models we created for each of the dataset
 
 # Additional Work
 
-Here is our Confluence page on how we set up our infrastructure on AWS Lambda + API Gateway: https://jgroza.atlassian.net/l/cp/T0HRXf4S
+Here is our Confluence page on how we set up our infrastructure on AWS Lambda + API Gateway: https://drive.google.com/file/d/16JJV3SDBThKrecgMMOQOz-11pHwTmXkk/view?usp=sharing
 
-Here is our model documentation confluence page that outlines all the results for each dataset model: https://jgroza.atlassian.net/wiki/spaces/L/pages/2687021/Model+Documentation 
+Here is our model documentation confluence page that outlines all the results for each dataset model: https://drive.google.com/file/d/1nQf6MTXJFyp91KBHfoCq-sQu26jtQztb/view?usp=sharing
+
 
