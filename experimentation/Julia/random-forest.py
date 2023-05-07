@@ -1,3 +1,5 @@
+# This file runs random forest based on the dataset input.
+
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
@@ -39,10 +41,6 @@ def linreg(csvData, dependentVar):
     # Plotting
     plt.scatter(radonTest, preds)
     plt.show()
-
-
-
-
 
 
 
