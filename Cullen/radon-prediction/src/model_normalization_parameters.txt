@@ -1,2 +1,0 @@
-radon_min=42
-radon_max=2934
