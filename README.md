@@ -2,9 +2,7 @@
 This repository was developed as part of RBC's Let's Solve It, Spring 2023 Cohort.
 
 # Contents
-The client repository holds the product we created that displayes a UI to the user and makes an API request to our AWS Lambda function.
-
-The experimentation folder include the models we created for each of the datasets to come to the best model. 
+The client repository holds the product we created that displayes a UI to the user. The experimentation folder include the models we created for each of the datasets to come to the best model. The lambda folder holds the serverless architecture we used to host the model for users to interact with.
 
 # Additional Work
 
