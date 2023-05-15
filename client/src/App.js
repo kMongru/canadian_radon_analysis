@@ -1,6 +1,8 @@
 import "./App.scss";
 import React, { useState } from "react";
 import removeRadon from "./removeRadon.png";
+import csvPng from "./csv.png";
+import arrow from "./arrow.png";
 import Papa from "papaparse";
 
 // drag drop file component
@@ -90,7 +92,20 @@ function DragDropFile(props) {
     e.stopPropagation();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      console.log(e.dataTransfer.files[0]);
       handleFile(e.dataTransfer.files[0]);
+    } else {
+      // DEMO CHANGE
+      const fetchData = async () => {
+        const response = await fetch(
+          "/static/media/RadonTestCSV.7efd7c90c62da24d748a.csv"
+        );
+        let blob = await response.blob();
+        const file = new File([blob], "demo.csv", { type: "text/csv" });
+        console.log(file);
+        handleFile(file);
+      };
+      fetchData();
     }
   };
 
@@ -234,38 +249,65 @@ function RenderSwitch() {
 
 function App() {
   return (
-    <div>
-      <img src={removeRadon} style={{ width: "400px" }} />
-      {RenderSwitch()}
-      <h1>How does it work?</h1>
-      <ol style={{ textAlign: "left", margin: "auto", width: "28rem" }}>
-        <li>
-          Upload your file with the headers "temperature", "humidity",
-          "pressure", "tvoc", and "state".
-        </li>
-        <li>Submit your file</li>
-        <li>Wait to view the results!</li>
-      </ol>
-      <div style={{ marginTop: "5vh" }}>
-        <strong>Made with ❤️ by</strong>
-        <div>
-          {" "}
-          <a href="https://www.linkedin.com/in/juliagroza/">
-            Julia Groza
-          </a>,{" "}
-          <a href="https://www.linkedin.com/in/rhys-dominguez/">
-            Rhys Dominguez
-          </a>
-          ,{" "}
-          <a href="https://www.linkedin.com/in/keegan-mongru/">Keegan Mongru</a>
-          ,{" "}
-          <a href="https://www.linkedin.com/in/cullen-macleod/">
-            Cullen Macleod
-          </a>
-          ,{" "}
-          <a href="https://www.linkedin.com/in/jack-peplinski/">
-            Jack Peplinski
-          </a>
+    <div style={{ display: "flex", flexDirection: "row" }}>
+      <div>
+        <img src={removeRadon} alt="logo" style={{ width: "400px" }} />
+        {RenderSwitch()}
+        <h1>How does it work?</h1>
+        <ol style={{ textAlign: "left", margin: "auto", width: "28rem" }}>
+          <li>
+            Upload your file with the headers "temperature", "humidity",
+            "pressure", "tvoc", and "state".
+          </li>
+          <li>Submit your file</li>
+          <li>Wait to view the results!</li>
+        </ol>
+        <div style={{ marginTop: "5vh" }}>
+          <strong>Made with ❤️ by</strong>
+          <div>
+            {" "}
+            <a href="https://www.linkedin.com/in/juliagroza/">
+              Julia Groza
+            </a>,{" "}
+            <a href="https://www.linkedin.com/in/rhys-dominguez/">
+              Rhys Dominguez
+            </a>
+            ,{" "}
+            <a href="https://www.linkedin.com/in/keegan-mongru/">
+              Keegan Mongru
+            </a>
+            ,{" "}
+            <a href="https://www.linkedin.com/in/cullen-macleod/">
+              Cullen Macleod
+            </a>
+            ,{" "}
+            <a href="https://www.linkedin.com/in/jack-peplinski/">
+              Jack Peplinski
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "30vw",
+        }}
+      >
+        {/* Test CSV File */}
+        <img src={arrow} alt="arrow" style={{ width: "200px", scale: "1.8" }} />
+        <div
+          style={{
+            border: "2px black dashed",
+            borderRadius: "6px",
+            padding: "15px",
+            marginLeft: "80px",
+          }}
+        >
+          <div draggable>
+            <img src={csvPng} alt="CSV" style={{ width: "100px" }} />
+          </div>
         </div>
       </div>
     </div>
