@@ -16,4 +16,7 @@ Here is our Confluence page on how we set up our infrastructure on AWS Lambda + 
 
 Here is our model documentation confluence page that outlines all the results for each dataset model: https://drive.google.com/file/d/1nQf6MTXJFyp91KBHfoCq-sQu26jtQztb/view?usp=sharing
 
+Here is our summary of the work we did for this project: https://docs.google.com/document/d/1ml6xpbwGQMJh5QUZS4Z-zXh8zkZCbixRwbMt23RR8l0/edit?usp=sharing
+
+
 
