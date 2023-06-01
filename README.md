@@ -1,8 +1,14 @@
 # canadian_radon_analysis
+![Screenshot 2023-06-01 at 1 37 44 PM](https://github.com/kMongru/canadian_radon_analysis/assets/39448504/d9723782-3d7f-4241-993f-5a83680e06e1)
+
 This repository was developed as part of RBC's Let's Solve It, Spring 2023 Cohort.
 
 # Contents
 The client repository holds the product we created that displayes a UI to the user. The experimentation folder include the models we created for each of the datasets to come to the best model. The lambda folder holds the serverless architecture we used to host the model for users to interact with.
+
+# Model Deployment
+![Screenshot 2023-06-01 at 1 38 26 PM](https://github.com/kMongru/canadian_radon_analysis/assets/39448504/a7a056c1-468f-41b6-be4f-91d35eb2ef9b)
+
 
 # Additional Work
 
